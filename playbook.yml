@@ -1,0 +1,41 @@
+- hosts: Node1
+ 
+  tasks:
+    - name: Run Zookeeper
+      script: ./zookeeper.sh 10.5.48.138 10.5.48.48 10.5.48.208
+
+- hosts: Node1
+ 
+  tasks:
+    - name: Run Zookeeper
+      script: ./kafka.sh 10.5.48.138 10.5.48.48 10.5.48.208
+
+
+- hosts: Node1
+ 
+  tasks:
+    - name: Run Zookeeper
+      script: ./schema-registry.sh 10.5.48.138 10.5.48.48 10.5.48.208
+
+
+
+- hosts: Node1
+ 
+  tasks:
+    - name: Create Kafka Topic
+      script: ./create-kafka-topic.sh 10.5.48.138 10.5.48.48 10.5.48.208
+
+
+- hosts: Node1
+ 
+  tasks:
+    - name: Run Kafka Connect
+      script: ./kafka-connect.sh 10.5.48.138 10.5.48.48 10.5.48.208
+
+
+
+- hosts: Node1
+ 
+  tasks:
+    - name: Create Sink Connector 10.5.48.48 10.5.48.208
+      script: ./create-sink.sh
