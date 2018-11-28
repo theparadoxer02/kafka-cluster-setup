@@ -1,20 +1,22 @@
 - hosts: all
- 
+  roles:
+    - Docker
+    
+
+- hosts: all
   tasks:
     - name: Run Zookeeper
       script: ./zookeeper.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
 - hosts: all
- 
   tasks:
-    - name: Run Zookeeper
+    - name: Run Kafka
       script: ./kafka.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
 
 - hosts: all
- 
   tasks:
-    - name: Run Zookeeper
+    - name: Run Schema Registry
       script: ./schema-registry.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
 
@@ -22,7 +24,7 @@
 - hosts: Node1
  
   tasks:
-    - name: Create Kafka Topic
+    - name: Create Kafka Topic in Node 1
       script: ./create-kafka-topic.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
 
@@ -34,8 +36,8 @@
 
 
 
-- hosts: Node1
+# - hosts: Node1
  
-  tasks:
-    - name: Create Sink Connector 10.5.48.48 10.5.48.208
-      script: ./create-sink.sh
+#   tasks:
+#     - name: Create Sink Connector 10.5.48.48 10.5.48.208
+#       script: ./create-sink.sh
