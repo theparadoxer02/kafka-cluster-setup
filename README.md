@@ -4,7 +4,7 @@
     `ssh-keygen`. Double Press Enter and you private key is saved to the path `~/.ssh/id_rsa`
 
 2. Copy the Private ssh key of your system to the Server/Remote Node
-    `ssh-copy-id -i ~/.ssh/id_rsa user@remotehost`
+    `ssh-copy-id -i ~/.ssh/id_rsa user@remotehost`. do it for all the remote hosts.
 
 3. In `hosts` file Change the values `ansible_user`, `ansible_host`, `ansible_private_key_file` according to the Nodes. If needed, you can add another Group.
 
