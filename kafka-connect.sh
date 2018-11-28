@@ -1,3 +1,4 @@
+# Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
 i=0
 for var in "$@"
 do
@@ -7,8 +8,8 @@ do
 done
 
 
-bootstrap_server_url=""
-schema_registry_url=""
+bootstrap_server_url=""     # Bootstrap Server links like Server1:9092,Server2:9092,
+schema_registry_url=""      # Schema Registry Url link like Server1:8081,Server2:8081,
 
 j=0
 for var in "$@"
@@ -18,8 +19,8 @@ do
     schema_registry_url="$schema_registry_url"$\Server$j":8081,"
 done
 
-echo $bootstrap_server_url
-echo $schema_registry_url
+# echo $bootstrap_server_url
+# echo $schema_registry_url
 
 eval SelfIP=$\Server$id
 
@@ -29,7 +30,7 @@ docker run -d \
   --link zoo-$id:zookeeper \
   --link kafka-$id:kafka \
   --link schema-registry-$id:schema-registry \
-  -e CONNECT_BOOTSTRAP_SERVERS=$Server1:9092,$Server2:9092,$Server3:9092 `#  Addresses of the Kafka brokers` \
+  -e CONNECT_BOOTSTRAP_SERVERS=$bootstrap_server_url `#  Addresses of the Kafka brokers` \
   -e CONNECT_GROUP_ID="quickstart-avro" `# Create a Group Id` \
   -e CONNECT_CONFIG_STORAGE_TOPIC="quickstart-avro-config" `# First Topic created using Kafka-Topic` \
   -e CONNECT_OFFSET_STORAGE_TOPIC="quickstart-avro-offsets" `# Second Topic created using Kafka-Topic` \

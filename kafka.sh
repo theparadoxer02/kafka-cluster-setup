@@ -1,3 +1,5 @@
+# Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
+
 i=0
 for var in "$@"
 do
@@ -7,8 +9,8 @@ do
 done
 
 
-kafka_server_link=""
-kafka_server_list=""
+kafka_server_link=""    # Server links like Server1:2181,Server2:2181,
+kafka_server_list=""    # For Argument like "-e Server1:$Server1 -e Server2:$Server2"
 
 j=0
 for var in "$@"
@@ -18,10 +20,10 @@ do
     kafka_server_list="$kafka_server_list -e Server$j="$\Server$j""
 done
 
-echo $kafka_server_list
-echo $kafka_server_list
+# echo $kafka_server_list
+# echo $kafka_server_list
 
-eval SelfIP=$\Server$id
+eval SelfIP=$\Server$id     # Ip address of the current node
 
 ## Kafka on Node1 / Host1:
 t="docker run -d \
@@ -34,5 +36,7 @@ t="docker run -d \
     -e KAFKA_ADVERTISED_PORT=9092 `# Kafka Service port` \
     -p 9092:9092 \
     confluent/kafka"
-echo $t
+
+# echo $t
+
 eval $t

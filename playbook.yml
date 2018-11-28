@@ -1,17 +1,17 @@
-- hosts: Node1
+- hosts: all
  
   tasks:
     - name: Run Zookeeper
       script: ./zookeeper.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
-- hosts: Node1
+- hosts: all
  
   tasks:
     - name: Run Zookeeper
       script: ./kafka.sh 10.5.48.138 10.5.48.48 10.5.48.208
 
 
-- hosts: Node1
+- hosts: all
  
   tasks:
     - name: Run Zookeeper
