@@ -23,9 +23,9 @@ done
 # `$#` is the total number of nodes passed in the argument
 
 t = 'docker exec -it kafka-$id sh -c " \
-  kafka-topics --create --topic quickstart-avro-offsetss --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
-  && kafka-topics --create --topic quickstart-avro-config --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
-  && kafka-topics --create --topic quickstart-avro-status --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
+  kafka-topics --create --topic iot-avro-offsetss --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
+  && kafka-topics --create --topic iot-avro-config --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
+  && kafka-topics --create --topic iot-avro-status --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
   '
 
 eval $t

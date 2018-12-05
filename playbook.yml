@@ -1,3 +1,5 @@
+# {% for ip in "{{ groups['kafka'] | map('extract', hostvars, ['ansible_default_ipv4','address']) | list }}" %} {{ ip }} {% endfor %}
+
 - hosts: all
   roles:
     - Docker
