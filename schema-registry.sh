@@ -28,7 +28,39 @@ t="docker run -d \
   --link zoo-$id:zookeeper \
   --link kafka-$id:kafka \
   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=$kafka_connection_url \
-  -e SCHEMA_REGISTRY_HOST_NAME=$SelfIP `# Hostname of schema Registry` \
+  -e SCHEMA_REGISTRY_HOST_NAME="localhost" `# Hostname of schema Registry` \
+  -p 8081:8081 \
   confluent/schema-registry"
 
 eval $t
+
+
+
+# docker run -d \
+#   --name=schema-registry-1 `# Name of the Container Image` \
+#   --link zoo-1:zookeeper \
+#   --link kafka-1:kafka \
+#   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL="10.5.50.230:2181" \
+#   -e SCHEMA_REGISTRY_HOST_NAME="localhost" \
+#   -e SCHEMA_REGISTRY_DEBUG=TRUE \
+#   -p 8081:8081 \
+#   confluent/schema-registry
+
+
+# docker run -d \
+#   --name=schema-registry \
+#   --link zoo-1:zookeeper \
+#   --link kafka-1:kafka \
+#   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=localhost:2181 \
+#   -e SCHEMA_REGISTRY_HOST_NAME=0.0.0.0 \
+#   -e SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081 \
+#   confluentinc/cp-schema-registry:4.0.0
+
+
+
+# producer = KafkaProducer(bootstrap_servers='10.5.50.226:29092', value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+
+# try:
+#     producer.send('iotavro', { "id":2,"deviceid":"120","latitude": 1999.23, "longitude": 23.3434, "temperature": "90", "created_date": "2017-01-26T00:00:00-05:00"})
+# Exception as ex:
+#     print(str(ex))

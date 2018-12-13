@@ -1,0 +1,13 @@
+{
+    "type" : "record",
+    "namespace" : "NextIOT",
+    "name" : "Sensordata",
+    "fields" : [
+        { "name" : "id" , "type" : "int" },
+        { "name" : "deviceid", "type" : "string" },
+        { "name" : "latitude", "type" : "float" },
+        { "name" : "longitude", "type" : "float" },
+        { "name" : "temperature", "type" : "string" },
+        { "name" : "created_at", "type" : { "type": "string", "logicalType": "timestamp-micros" } }
+    ]
+}
