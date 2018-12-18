@@ -22,7 +22,7 @@ payload = "{ \"schema\": \"" \
           + "\" }"
 
 url = schema_registry_url + "/subjects/" + topic + "-value/versions"
-headers = {"Content-Type": "application/vnd.kafka.v1+json"}
+headers = {"Content-Type": "application/vnd.schemaregistry.v1+json"}
 
 r = requests.post(url, headers=headers, data=payload)
 if r.status_code == requests.codes.ok:

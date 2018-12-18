@@ -1,2 +1,12 @@
 [Node1]
-3.1.6.69 ansible_user=centos ansible_private_key_file=./NextSoftware.pem
+10.0.1.70 ansible_user=centos ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@13.229.138.138"'
+
+
+
+[Node2]
+10.0.1.212 ansible_user=centos ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@13.229.138.138"'
+
+
+[Node3]
+10.0.1.94 ansible_user=centos ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@13.229.138.138"'
+
