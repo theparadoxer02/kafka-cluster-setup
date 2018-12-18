@@ -64,3 +64,13 @@ eval $t
 #     producer.send('iotavro', { "id":2,"deviceid":"120","latitude": 1999.23, "longitude": 23.3434, "temperature": "90", "created_date": "2017-01-26T00:00:00-05:00"})
 # Exception as ex:
 #     print(str(ex))
+
+
+# docker run -d \
+#   --name=schema-registry-1 `# Name of the Container Image` \
+#   --link zoo-1:zookeeper \
+#   --link kafka-$id:kafka \
+#   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL="172.31.0.114:2181" \
+#   -e SCHEMA_REGISTRY_HOST_NAME=3.0.209.191 \
+#   -p 8081:8081 \
+#   confluent/schema-registry

@@ -94,7 +94,8 @@ docker run -d \
   --link zoo-1:zookeeper \
   --link kafka-1:kafka \
   --link schema-registry-1:schema-registry \
-  -e CONNECT_BOOTSTRAP_SERVERS=172.31.0.114:9092 `#  Addresses of the Kafka brokers` \
+  -e CONNECT_BOOTSTRAP_SERVERS=10.5.50.233:9092 `#  Addresses of the Kafka brokers` \
+  -e CONNECT_REST_PORT=8083 \
   -e CONNECT_GROUP_ID="iotavro" `# Create a Group Id` \
   -e CONNECT_CONFIG_STORAGE_TOPIC="iot-avro-config" `# First Topic created using Kafka-Topic` \
   -e CONNECT_OFFSET_STORAGE_TOPIC="iot-avro-offsets" `# Second Topic created using Kafka-Topic` \
@@ -102,15 +103,14 @@ docker run -d \
   -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1  `# Factor used when Kafka Connects creates the topic used to store connector and task` \
   -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1  `# Factor used when Kafka Connects creates the topic used to store connector offsets` \
   -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1  `# Factor used when connector and task configuration status updates are stored` \
-  -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" ` # Data Format Converter for Key` \
-  -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" `#  Data Format Converter for Value` \
-  -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=172.31.0.114:8081 `# Connect Key Schema Registry URL` \
-  -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=172.31.0.114:8081 `# Connect Value Schema Registry URL` \
+  -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" \
+  -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" \
+  -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL="http://10.5.50.233:8081" \
+  -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL="http://10.5.50.233:8081" \
   -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" `# Internal Data Format Converter for Key` \
   -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" `# Internal Data Format Converter for Value` \
   -e CONNECT_REST_ADVERTISED_HOST_NAME="0.0.0.0" `# Kafka Connect Rest API Interface` \
-  -e CONNECT_REST_PORT=8083 `# Kafka connect REST API PORT` \
-  -e CONNECT_LOG4J_ROOT_LOGLEVEL=INFO `# Connect Log Level` \
+  -e CONNECT_LOG4J_ROOT_LOGLEVEL=DEBUG `# Connect Log Level` \
   -e CONNECT_PLUGIN_PATH=/usr/share/java/\
   -p 8083:8083 \
-  confluentinc/cp-kafka-connect:latest
+  confluentinc/cp-kafka-connect:5.0.1

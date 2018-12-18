@@ -1,2 +1,2 @@
 [Node1]
-ec2-3-0-209-191.ap-southeast-1.compute.amazonaws.com ansible_user=centos ansible_private_key_file=./NextSoftware.pem
+3.1.6.69 ansible_user=centos ansible_private_key_file=./NextSoftware.pem
