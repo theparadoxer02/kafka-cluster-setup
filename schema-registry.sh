@@ -30,7 +30,7 @@ t="docker run -d \
   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=$kafka_connection_url \
   -e SCHEMA_REGISTRY_HOST_NAME="localhost" `# Hostname of schema Registry` \
   -p 8081:8081 \
-  confluent/schema-registry"
+  confluentinc/cp-schema-registry:5.0.1"
 
 eval $t
 

@@ -35,7 +35,7 @@ t="docker run -d \
     -e KAFKA_ADVERTISED_HOST_NAME=$SelfIP  `# Self server Public IP` \
     -e KAFKA_ADVERTISED_PORT=9092 `# Kafka Service port` \
     -p 9092:9092 \
-    confluent/kafka"
+    confluentinc/cp-kafka:5.0.1"
 
 # echo $t
 
