@@ -1,4 +1,5 @@
 # Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
+source ~/.bashrc
 
 i=0
 for var in "$@"

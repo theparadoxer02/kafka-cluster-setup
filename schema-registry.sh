@@ -1,4 +1,7 @@
 # Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
+source ~/.bashrc
+docker rm -f schema-registry-$id
+
 i=0
 for var in "$@"
 do
@@ -29,6 +32,7 @@ t="docker run -d \
   --link kafka-$id:kafka \
   -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=$kafka_connection_url \
   -e SCHEMA_REGISTRY_HOST_NAME=$SelfIP `# Hostname of schema Registry` \
+  -p 8081:8081 \
   confluent/schema-registry"
 
 eval $t

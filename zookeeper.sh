@@ -1,5 +1,5 @@
 docker rm -f $(docker ps -a -q) # Delete previously docker container
-
+source ~/.bashrc
 
 # Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
 i=0
