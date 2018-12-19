@@ -2,58 +2,58 @@
 source ~/.bashrc
 docker rm -f kafka-connect-avro
 
-i=0
-for var in "$@"
-do
-    echo "$var"
-    let i=i+1
-    eval Server$i=$var
-done
-
-
-# bootstrap_server_url=""     # Bootstrap Server links like Server1:9092,Server2:9092,
-# schema_registry_url=""      # Schema Registry Url link like Server1:8081,Server2:8081,
-
-# j=0
+# i=0
 # for var in "$@"
 # do
-#     let j=j+1
-#     bootstrap_server_url="$bootstrap_server_url"$\Server$j":9092,"
-#     schema_registry_url="$schema_registry_url"$\Server$j":8081,"
+#     echo "$var"
+#     let i=i+1
+#     eval Server$i=$var
 # done
 
-# echo $bootstrap_server_url
-# echo $schema_registry_url
 
-eval SelfIP=$\Server$id
+# # bootstrap_server_url=""     # Bootstrap Server links like Server1:9092,Server2:9092,
+# # schema_registry_url=""      # Schema Registry Url link like Server1:8081,Server2:8081,
 
-docker run -d \
-  --name=kafka-connect-avro \
-  --link zoo-$id:zookeeper \
-  --link kafka-$id:kafka \
-  --link schema-registry-$id:schema-registry \
-  -e CONNECT_BOOTSTRAP_SERVERS=$SelfIP:9092 \
-  -e CONNECT_GROUP_ID="iotavro" \
-  -e CONNECT_CONFIG_STORAGE_TOPIC="iot-avro-config" \
-  -e CONNECT_OFFSET_STORAGE_TOPIC="iot-avro-offsets" \
-  -e CONNECT_STATUS_STORAGE_TOPIC="iot-avro-status" \
-  -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1 \
-  -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1 \
-  -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1 \
-  -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" \
-  -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" \
-  -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL="$SelfIP:8081" `# Connect Key Schema Registry URL` \
-  -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL="$SelfIP:8081" \
-  -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" \
-  -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" \
-  -e CONNECT_REST_ADVERTISED_HOST_NAME="0.0.0.0"  \
-  -e CONNECT_REST_PORT=8083 \
-  -e CONNECT_LOG4J_ROOT_LOGLEVEL=DEBUG \
-  -e CONNECT_PLUGIN_PATH=/usr/share/java/\
-  -v /tmp/quickstart/file:/tmp/quickstart \
-  -v /tmp/quickstart/jars:/etc/kafka-connect/jars \
-  -p 8083:8083 \
-  confluentinc/cp-kafka-connect:5.0.1
+# # j=0
+# # for var in "$@"
+# # do
+# #     let j=j+1
+# #     bootstrap_server_url="$bootstrap_server_url"$\Server$j":9092,"
+# #     schema_registry_url="$schema_registry_url"$\Server$j":8081,"
+# # done
+
+# # echo $bootstrap_server_url
+# # echo $schema_registry_url
+
+# eval SelfIP=$\Server$id
+
+# docker run -d \
+#   --name=kafka-connect-avro \
+#   --link zoo-$id:zookeeper \
+#   --link kafka-$id:kafka \
+#   --link schema-registry-$id:schema-registry \
+#   -e CONNECT_BOOTSTRAP_SERVERS=$SelfIP:9092 \
+#   -e CONNECT_GROUP_ID="iotavro" \
+#   -e CONNECT_CONFIG_STORAGE_TOPIC="iot-avro-config" \
+#   -e CONNECT_OFFSET_STORAGE_TOPIC="iot-avro-offsets" \
+#   -e CONNECT_STATUS_STORAGE_TOPIC="iot-avro-status" \
+#   -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1 \
+#   -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1 \
+#   -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1 \
+#   -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" \
+#   -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" \
+#   -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL="$SelfIP:8081" `# Connect Key Schema Registry URL` \
+#   -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL="$SelfIP:8081" \
+#   -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" \
+#   -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" \
+#   -e CONNECT_REST_ADVERTISED_HOST_NAME="0.0.0.0"  \
+#   -e CONNECT_REST_PORT=8083 \
+#   -e CONNECT_LOG4J_ROOT_LOGLEVEL=DEBUG \
+#   -e CONNECT_PLUGIN_PATH=/usr/share/java/\
+#   -v /tmp/quickstart/file:/tmp/quickstart \
+#   -v /tmp/quickstart/jars:/etc/kafka-connect/jars \
+#   -p 8083:8083 \
+#   confluentinc/cp-kafka-connect:5.0.1
 
 
 # docker run -d \
