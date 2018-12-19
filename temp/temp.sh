@@ -1,0 +1,23 @@
+docker run -d \
+  --name=kafka-connect-avro \
+  --net=host \
+  -e CONNECT_BOOTSTRAP_SERVERS=localhost:29092 `#  Addresses of the Kafka brokers` \
+  -e CONNECT_REST_PORT=28083 `# Kafka connect REST API PORT` \
+  -e CONNECT_GROUP_ID="quickstart-avro" `# Create a Group Id` \
+  -e CONNECT_CONFIG_STORAGE_TOPIC="iot-avro-config" `# First Topic created using Kafka-Topic` \
+  -e CONNECT_OFFSET_STORAGE_TOPIC="iot-avro-offsets" `# Second Topic created using Kafka-Topic` \
+  -e CONNECT_STATUS_STORAGE_TOPIC="iot-avro-status" `# Third Topic created using Kafka-Topic` \
+  -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1 `# Factor used when Kafka Connects creates the topic used to store connector and task configuration data` \
+  -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1 `# Factor used when Kafka Connects creates the topic used to store connector offsets` \
+  -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1 `# Factor used when connector and task configuration status updates are stored` \
+  -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" ` # Data Format Converter for Key` \
+  -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" `#  Data Format Converter for Value` \
+  -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL="http://localhost:8081" `# Connect Key Schema Registry URL` \
+  -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL="http://localhost:8081" `# Connect Value Schema Registry URL` \
+  -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" `# Internal Data Format Converter for Key` \
+  -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" `# Internal Data Format Converter for Value` \
+  -e CONNECT_REST_ADVERTISED_HOST_NAME="localhost" `# Connect Rest Publish Host` \
+  -e CONNECT_LOG4J_ROOT_LOGLEVEL=DEBUG `# Connect Log Level` \
+  -v /tmp/quickstart/file:/tmp/quickstart \ 
+  -v /tmp/quickstart/jars:/usr/share/jars \
+  confluentinc/cp-kafka-connect:latest

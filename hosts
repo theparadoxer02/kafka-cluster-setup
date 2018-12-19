@@ -1,8 +1,0 @@
-[Node1]
-10.5.48.138 ansible_user=root ansible_private_key_file=./key_pvt
-
-[Node2]
-10.5.48.48 ansible_user=root ansible_private_key_file=./key_pvt
-
-[Node3]
-10.5.48.208 ansible_user=root ansible_private_key_file=./key_pvt
