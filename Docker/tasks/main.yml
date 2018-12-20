@@ -25,16 +25,15 @@
     state: latest
   become: yes
 
-- name: Start Docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
-  become: yes
+# - name: Start Docker service
+#   systemd:
+#     name: docker
+#     state: restarted
+#   become: yes
 
-- name: Add user root to docker group
-  user:
-    name: root
-    groups: docker
-    append: yes
-  become: yes
+# - name: Add user root to docker group
+#   user:
+#     name: root
+#     groups: docker
+#     append: yes
+#   become: yes

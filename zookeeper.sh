@@ -28,6 +28,7 @@ done
 
 t="docker run -d \
     --name zoo-$id \
+    -e ZOOKEEPER_CLIENT_PORT=2181 \
     -e zk_id=$id `# Zookeeper ID` \
     $zk_server_list_arg \
     -p 2181:2181 \

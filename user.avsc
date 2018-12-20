@@ -1,0 +1,10 @@
+{
+	"namespace": "example.avro",
+	"type": "record",
+	"name": "User",
+	"fields": [
+		{"name": "deviceid", "type": "string"},
+		{"name": "latitude",  "type": ["float", "null"]},
+		{"name": "longitude", "type": ["float", "null"]}
+	]
+}

@@ -23,9 +23,28 @@ done
 # `$#` is the total number of nodes passed in the argument
 
 t = 'docker exec -it kafka-$id sh -c " \
-  kafka-topics --create --topic iot-avro-offsetss --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
-  && kafka-topics --create --topic iot-avro-config --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
+  kafka-topics --create --topic --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
+  && kafka-topics --create --topic iot-avro-confiot-avro-offsets ig --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
   && kafka-topics --create --topic iot-avro-status --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
+  && kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
   '
 
 eval $t
+
+
+
+# kafka-topics --create --topic nextiot --partitions 1 --replication-factor 1 --if-not-exists     --zookeeper zookeeper:2181
+# # kafka-topics --create --topic iotavro --partitions 1 --replication-factor 1 --if-not-exists --zookeeper 10.5.50.226:2181
+
+# kafka-console-producer --request-required-acks 1 \
+# --broker-list kafka:9092 --topic nextiot && echo 'Produced 42 messages.'"
+
+
+# kafka-topics --create --topic iot-avro-config --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper zookeeper:2181
+
+# kafka-topics --create --topic iot-avro-offsets --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper zookeeper:2181
+
+# kafka-topics --create --topic iot-avro-status --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper zookeeper:2181
+
+
+# kafka-topics --create --topic nextiot --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper 10.5.50.233:2181
