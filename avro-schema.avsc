@@ -1,1 +1,23 @@
-{"type":"record","name":"myrecord","fields":[{"name": "deviceid", "type": "string"}, {"name": "latitude",  "type": ["float", "null"]},{"name": "longitude", "type": ["float", "null"]}]}}
+{
+    "type":"record",
+    "name":"IOT",
+    "namespace":"iot.sensordata",
+    "fields":[
+        {
+            "name":"deviceid",
+            "type":"string"
+        },
+        {
+            "name":"latitude",
+            "type":"float"
+        },
+        {
+            "name":"longitude",
+            "type":"float"
+        },
+        {
+            "name":"temperature",
+            "type":"float"
+        }
+    ]
+}
