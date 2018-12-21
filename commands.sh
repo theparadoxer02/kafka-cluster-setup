@@ -23,6 +23,10 @@ ssh centos@10.0.1.94
 
 psql -h 10.0.1.233 -U next_user -d nextiot
 
+\c nextiot
+
+select * from nextiot;
+
 
 git clone https://gitlab.com/theparadoxer02/iotflaskapi
 cd iotflaskapi
@@ -46,9 +50,12 @@ pip install uwsgi
 
 
 # Gunicorn
-gunicorn --bind 0.0.0.0:5556 wsgi:app
+gunicorn --bind 0.0.0.0:5555 wsgi:app
 gunicorn --bind 0.0.0.0:5555 wsgi:app
 gunicorn --bind 0.0.0.0:5555 wsgi:app
 
 
 nohup /home/centos/flaskapi/iotflaskapi/gunicorn.sh &
+
+# Front end and backend SERVER
+ssh ubuntu@52.221.83.184
