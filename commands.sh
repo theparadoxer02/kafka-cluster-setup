@@ -59,3 +59,11 @@ nohup /home/centos/flaskapi/iotflaskapi/gunicorn.sh &
 
 # Front end and backend SERVER
 ssh ubuntu@52.221.83.184
+
+
+INSERT INTO nextiot (deviceid, latitude, longitude, temperature) VALUES ('2', 28.671310915880834, 77.17620849609375, 23);
+
+
+# PSQL query to get distinct device id and corresponding data
+select distinct on (deviceid) deviceid, temperature, latitude, longitude from nextiot order by deviceid, temperature;
+
