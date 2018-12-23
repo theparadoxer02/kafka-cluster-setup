@@ -67,3 +67,6 @@ INSERT INTO nextiot (deviceid, latitude, longitude, temperature) VALUES ('2', 28
 # PSQL query to get distinct device id and corresponding data
 select distinct on (deviceid) deviceid, temperature, latitude, longitude from nextiot order by deviceid, temperature;
 
+
+# Ping all ansible hosts
+ansible all -m ping -i hosts.ini
