@@ -1,18 +1,51 @@
 # Setup the Server
 
-1. Generate a SSH Key in your system if not generated before using
-    `ssh-keygen`. Double Press Enter and you private key is saved to the path `~/.ssh/id_rsa`
+1. Create Servers in AWS/or anywhere 
+    Then environment variable named `id` for the `sudo` user to all the servers and assign serial no to them.
+    
 
-2. Copy the Private ssh key of your system to the Server/Remote Node
-    `ssh-copy-id -i ~/.ssh/id_rsa user@remotehost`. do it for all the remote hosts.
+    Note: The Environment variable should be made for superuser otherwise it won't work.So do only it after changing user to superuser.
+    
+    For ex:- If you have 3 nodes then:
+    ```
+    echo id=1 >> .bashrc in node1
+    echo id=2 >> .bashrc in node3
+    echo id=3 >> .bashrc in node3
+    ```
 
-3. In `hosts` file Change the values `ansible_user`, `ansible_host`, `ansible_private_key_file` according to the Nodes. If needed, you can add another Group.
 
-4. Change IP address that are passed corresponding to the script to nodes ip address, Here we can add any odd number of ip address to make a kafka cluster.
- for ex:- ```script: ./zookeeper.sh 10.5.48.138 10.5.48.48 10.5.48.208```
+2. Since We are using bastion server to hit request over the Nodes, So In `hosts.ini` file we need to       add an extra argument to do ssh to the node.
+    ```
+    ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q bastionuser@bastionserver"'
+    ```
+
+4. In `playbook.yml` file Change IP address  to Nodes Ips that are passed corresponding to the script
+    
+    For ex:- 
+    ```
+    script: ./zookeeper.sh 10.0.1.70 10.0.1.94 10.0.1.212
+    ```
+5. In `create_sink.sh` file to change the sink configuration file:
+    ```
+    "connection.url": "jdbc:postgresql://hostname:5432/nextiot",
+    "connection.user": "database_user",
+    "connection.password": "database_pass"
+    ```
+
+6. Run Command:
+
+    To Check if all of your hosts are accessible:
+    ```
+    ansible all -m ping -i hosts.ini
+    ```
+    To Start The Kafka Cluster:
+    ```
+    ansible-playbook -i hosts.ini --become playbook.yml
+    ```
+
+7. This Script with start with Zookeeper, Kafka, Schema-Registry in all the node and 
+    Kafka-connect with sink to postgres in a first node.
 
 
-
-```curl -X POST -H "Content-Type: application/vnd.kafka.json.v2+json" \
-          --data '{"records":[{"value":{"id": 1, "longitude":90, "latitude": 90, "timestamp":"12-09-2018", "temperature": 25}}]}' \
-          "http://ec2-3-0-209-191.ap-southeast-1.compute.amazonaws.com:8082/topics/nextiot"         
+# Note:
+The default Topic created is `nextiot`and the current setup will be fetching and sinking data to postgres from the same topic
