@@ -14,4 +14,4 @@ curl -X POST -H "Content-Type: application/json" \
         "auto.evolve": true,
         "topics": "nextiot"
         }
-    }' http://10.0.0.70:8083/connectors
+    }' http://localhost:8083/connectors

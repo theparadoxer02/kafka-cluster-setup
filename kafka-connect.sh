@@ -1,6 +1,6 @@
 # Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
 source ~/.bashrc
-docker rm -f kafka-connect-avro
+docker rm -f kafka-connect-avro-$id
 
 i=0
 for var in "$@"
@@ -29,7 +29,7 @@ eval SelfIP=$\Server$id
 
 
 docker run -d \
-  --name=kafka-connect-avro \
+  --name=kafka-connect-avro-$id \
   --link zoo-$id:zookeeper \
   --link kafka-$id:kafka \
   --link schema-registry-$id:schema-registry \
