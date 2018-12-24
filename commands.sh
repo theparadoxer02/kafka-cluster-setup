@@ -70,3 +70,4 @@ select distinct on (deviceid) deviceid, temperature, latitude, longitude from ne
 
 # Ping all ansible hosts
 ansible all -m ping -i hosts.ini
+ansible-playbook -i hosts.ini --become playbook.yml
