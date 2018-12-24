@@ -14,8 +14,8 @@ from kafka import KafkaProducer
 a = KafkaProducer(bootstrap_servers=['3.0.166.133:9995'])
 
 
-ssh-add -K NextSoftware.pem
-ssh -A -i NextSoftware.pem ubuntu@13.229.138.138
+ssh-add -k NextSoftware.pem
+ssh -A -i NextSoftware.pem ubuntu@3.1.27.170
 
 ssh centos@10.0.1.70
 ssh centos@10.0.1.212
