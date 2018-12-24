@@ -1,3 +1,3 @@
-key_pvt
-NextSoftware.pem
-playbook.retry
+*.key_pvt
+*.pem
+*.retry
