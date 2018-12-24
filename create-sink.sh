@@ -1,5 +1,5 @@
 # kafka connect Avro takes time to start
-wait 20
+sleep 20
 
 
 curl -X POST -H "Content-Type: application/json" \
