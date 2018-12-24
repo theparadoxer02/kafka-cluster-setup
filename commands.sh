@@ -71,3 +71,9 @@ select distinct on (deviceid) deviceid, temperature, latitude, longitude from ne
 # Ping all ansible hosts
 ansible all -m ping -i hosts.ini
 ansible-playbook -i hosts.ini --become playbook.yml
+
+
+curl --header "Content-Type: application/json" \
+    --request POST \
+    --data '{"deviceid":"10", "temperature": 30, "latitude": 34.5, "longitude": 29.43}' \
+     http://10.0.1.70:5555/topic

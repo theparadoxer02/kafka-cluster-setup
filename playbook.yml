@@ -1,18 +1,18 @@
 # # {% for ip in "{{ groups['kafka'] | map('extract', hostvars, ['ansible_default_ipv4','address']) | list }}" %} {{ ip }} {% endfor %}
 
-- hosts: all
-  roles:
-    - Docker
-  become: yes
-  become_user: root
-  roles:
-    - Docker
+# - hosts: all
+#   roles:
+#     - Docker
+#   become: yes
+#   become_user: root
+#   roles:
+#     - Docker
 
   
-- hosts: all
-  tasks:
-    - name: Start Docker Service
-      script: ./start_docker_service.sh
+# - hosts: all
+#   tasks:
+#     - name: Start Docker Service
+#       script: ./start_docker_service.sh
     
 
 - hosts: all
@@ -37,7 +37,7 @@
  
   tasks:
     - name: Create Kafka Topic in Node 1
-      script: ./create-kafka-topic.sh 10.0.1.70 10.0.1.212 10.0.1.94 10.0.1.187 10.0.1.250
+      script: ./create-kafka-topic.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
 
 - hosts: [Node1]
