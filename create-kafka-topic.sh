@@ -10,23 +10,27 @@ do
 done
 
 
-kafka_connection_url=""     # Server links like Server1:2181,Server2:2181,
+zookeeper_connection_url=""     # Server links like Server1:2181,Server2:2181,
 
 j=0
 for var in "$@"
 do
     let j=j+1
-    kafka_connection_url="$kafka_connection_url"$\Server$j":2181,"
+    zookeeper_connection_url="$zookeeper_connection_url"$\Server$j":2181,"
 done
 
 # create 3 kafka topics after entering into the bash shell of kafka-server running on 1st node
 # `$#` is the total number of nodes passed in the argument
 
+
+# When Creating Topics are Kafka Connect manually
+#  kafka-topics --create --topic iot-avro-config --partitions 1 --replication-factor 3 --if-not-exists --zookeeper $zookeeper_connection_url \
+#   && kafka-topics --create --topic iot-avro-offsets --partitions 50 --replication-factor 3 --if-not-exists --zookeeper $zookeeper_connection_url \
+#   && kafka-topics --create --topic iot-avro-status --partitions 3 --replication-factor 10 --if-not-exists --zookeeper $zookeeper_connection_url" \
+
+
 t = 'docker exec -it kafka-$id sh -c " \
-  kafka-topics --create --topic --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
-  && kafka-topics --create --topic iot-avro-confiot-avro-offsets ig --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url \
-  && kafka-topics --create --topic iot-avro-status --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
-  && kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $kafka_connection_url" \
+   && kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $zookeeper_connection_url" \
   '
 
 eval $t
@@ -40,7 +44,7 @@ eval $t
 # --broker-list kafka:9092 --topic nextiot && echo 'Produced 42 messages.'"
 
 
-# kafka-topics --create --topic iot-avro-config --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper zookeeper:2181
+# kafka-topics --create --topic iot-avro-config --partitions 3 --replication-factor 2 --if-not-exists  --zookeeper 10.0.1.70:2181
 
 # kafka-topics --create --topic iot-avro-offsets --partitions 1 --replication-factor 1 --if-not-exists  --zookeeper zookeeper:2181
 

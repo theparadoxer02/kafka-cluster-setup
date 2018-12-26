@@ -39,9 +39,9 @@ docker run -d \
   -e CONNECT_CONFIG_STORAGE_TOPIC="iot-avro-config" `# First Topic created using Kafka-Topic` \
   -e CONNECT_OFFSET_STORAGE_TOPIC="iot-avro-offsets" `# Second Topic created using Kafka-Topic` \
   -e CONNECT_STATUS_STORAGE_TOPIC="iot-avro-status" `# Third Topic created using Kafka-Topic` \
-  -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1  `# Factor used when Kafka Connects creates the topic used to store connector and task` \
-  -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1  `# Factor used when Kafka Connects creates the topic used to store connector offsets` \
-  -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1  `# Factor used when connector and task configuration status updates are stored` \
+  -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3  `# Factor used when Kafka Connects creates the topic used to store connector and task` \
+  -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3  `# Factor used when Kafka Connects creates the topic used to store connector offsets` \
+  -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3  `# Factor used when connector and task configuration status updates are stored` \
   -e CONNECT_KEY_CONVERTER="io.confluent.connect.avro.AvroConverter" \
   -e CONNECT_VALUE_CONVERTER="io.confluent.connect.avro.AvroConverter" \
   -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL="http://$SelfIP:8081" \

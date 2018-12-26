@@ -15,7 +15,7 @@ a = KafkaProducer(bootstrap_servers=['3.0.166.133:9995'])
 
 
 ssh-add -k NextSoftware.pem
-ssh -A -i NextSoftware.pem ubuntu@3.1.27.170
+ssh -A -i NextSoftware.pem ubuntu@13.229.157.196
 
 ssh centos@10.0.1.70
 ssh centos@10.0.1.212
@@ -75,5 +75,5 @@ ansible-playbook -i hosts.ini --become playbook.yml
 
 curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"deviceid":"10", "temperature": 30, "latitude": 34.5, "longitude": 29.43}' \
+    --data '{"deviceid":"7", "temperature": 25, "latitude": 34.5, "longitude": 29.43, "timestamp": 1545655607573}' \
      http://10.0.1.70:5555/topic

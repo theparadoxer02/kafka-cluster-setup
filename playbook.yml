@@ -15,7 +15,7 @@
       script: ./start_docker_service.sh
 
 
-# Download JDBC Postgres
+Download JDBC Postgres
 - hosts: all
   tasks:
     - name: Download JDBC Server
@@ -25,18 +25,18 @@
 - hosts: all
   tasks:
     - name: Run Zookeeper
-      script: ./zookeeper.sh 10.0.1.70 10.0.1.212 10.0.1.94 10.0.1.187 10.0.1.250
+      script: ./zookeeper.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
 - hosts: all
   tasks:
     - name: Run Kafka
-      script: ./kafka.sh 10.0.1.70 10.0.1.212 10.0.1.94 10.0.1.187 10.0.1.250
+      script: ./kafka.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
 
 - hosts: all
   tasks:
     - name: Run Schema Registry
-      script: ./schema-registry.sh 10.0.1.70 10.0.1.212 10.0.1.94 10.0.1.187 10.0.1.250
+      script: ./schema-registry.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
 
 
@@ -47,19 +47,14 @@
       script: ./create-kafka-topic.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
 
-- hosts: [Node1]
- 
+- hosts: all
   tasks:
     - name: Run Kafka Connect
       script: ./kafka-connect.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
-  tasks:
-    - name: Create Kafka Topic in Node 1
-      script: ./create-kafka-topic.sh 10.0.1.70 10.0.1.212 10.0.1.94
 
-
-- hosts: [Node1]
+- hosts: all
  
   tasks:
-    - name: Create Sink Connector in 1 node
+    - name: Add Sink Connector
       script: ./create-sink.sh
