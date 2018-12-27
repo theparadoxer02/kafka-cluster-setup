@@ -34,10 +34,9 @@ t="docker run -d \
     --link zoo-$id:zookeeper \
     -e KAFKA_BROKER_ID=$id `# Kafka Broker Id number` \
     -e KAFKA_ZOOKEEPER_CONNECT=$kafka_server_link `# Zookeeper all Servers Address` \
-    $kafka_server_list \
     -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$SelfIP:9092 \
     -p 9092:9092 \
-    confluent/kafka"
+    confluentinc/cp-kafka:5.1.0"
 
 # echo $t
 

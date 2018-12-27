@@ -51,5 +51,7 @@ docker run -d \
   -e CONNECT_REST_ADVERTISED_HOST_NAME="0.0.0.0" `# Kafka Connect Rest API Interface` \
   -e CONNECT_LOG4J_ROOT_LOGLEVEL=DEBUG `# Connect Log Level` \
   -e CONNECT_PLUGIN_PATH=/usr/share/java/\
+  -v /tmp/quickstart/file:/tmp/quickstart \
+  -v /tmp/quickstart/jars:/etc/kafka-connect/jars \
   -p 8083:8083 \
   confluentinc/cp-kafka-connect:5.0.1

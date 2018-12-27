@@ -1,25 +1,25 @@
 # # {% for ip in "{{ groups['kafka'] | map('extract', hostvars, ['ansible_default_ipv4','address']) | list }}" %} {{ ip }} {% endfor %}
 
-- hosts: all
-  roles:
-    - Docker
-  become: yes
-  become_user: root
-  roles:
-    - Docker
+# - hosts: all
+#   roles:
+#     - Docker
+#   become: yes
+#   become_user: root
+#   roles:
+#     - Docker
 
   
-- hosts: all
-  tasks:
-    - name: Start Docker Service
-      script: ./start_docker_service.sh
+# - hosts: all
+#   tasks:
+#     - name: Start Docker Service
+#       script: ./start_docker_service.sh
 
 
-Download JDBC Postgres
-- hosts: all
-  tasks:
-    - name: Download JDBC Server
-      script: ./download_jdbc.sh
+# Download JDBC Postgres
+# - hosts: all
+#   tasks:
+#     - name: Download JDBC Server
+#       script: ./download_jdbc.sh
     
 
 - hosts: all

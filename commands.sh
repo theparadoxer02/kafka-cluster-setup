@@ -13,9 +13,9 @@ kafka-avro-console-producer   --broker-list 3.0.166.133:9995 3.0.166.133:9996 3.
 from kafka import KafkaProducer
 a = KafkaProducer(bootstrap_servers=['3.0.166.133:9995'])
 
-
+# SSH to Bastion Server
 ssh-add -k NextSoftware.pem
-ssh -A -i NextSoftware.pem ubuntu@13.229.157.196
+ssh -A -i NextSoftware.pem ubuntu@3.1.24.110
 
 ssh centos@10.0.1.70
 ssh centos@10.0.1.212
@@ -77,3 +77,7 @@ curl --header "Content-Type: application/json" \
     --request POST \
     --data '{"deviceid":"7", "temperature": 25, "latitude": 34.5, "longitude": 29.43, "timestamp": 1545655607573}' \
      http://10.0.1.70:5555/topic
+
+    
+# Check Kafka Version
+docker logs kafka | egrep -i "kafka\W+version"

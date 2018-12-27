@@ -24,13 +24,10 @@ done
 
 
 # When Creating Topics are Kafka Connect manually
-#  kafka-topics --create --topic iot-avro-config --partitions 1 --replication-factor 3 --if-not-exists --zookeeper $zookeeper_connection_url \
-#   && kafka-topics --create --topic iot-avro-offsets --partitions 50 --replication-factor 3 --if-not-exists --zookeeper $zookeeper_connection_url \
-#   && kafka-topics --create --topic iot-avro-status --partitions 3 --replication-factor 10 --if-not-exists --zookeeper $zookeeper_connection_url" \
 
 
 t = 'docker exec -it kafka-$id sh -c " \
-   && kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $zookeeper_connection_url" \
+   kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $zookeeper_connection_url" \
   '
 
 eval $t

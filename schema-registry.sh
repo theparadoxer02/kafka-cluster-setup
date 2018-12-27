@@ -1,6 +1,7 @@
 # Set Server Variable with argument passed like Server1=10.5.4..90, Server2=10.45.3.34
 source ~/.bashrc
 docker rm -f schema-registry-$id
+docker rm -f kafka-connect-avro-$id
 
 i=0
 for var in "$@"
@@ -17,10 +18,10 @@ j=0
 for var in "$@"
 do
     let j=j+1
-    kafka_bootstrap_servers="$kafka_bootstrap_servers"PLAINTEXT://$\Server$j":9092,"
+    kafka_bootstrap_servers="$kafka_bootstrap_servers"$\Server$j":2181,"
 done
 
-# echo $kafka_connection_url
+# echo $kafka_bootstrap_servers
 
 eval SelfIP=$\Server$id
 
@@ -30,10 +31,12 @@ t="docker run -d \
   --name=schema-registry-$id `# Name of the Container Image` \
   --link zoo-$id:zookeeper \
   --link kafka-$id:kafka \
-  -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=$kafka_bootstrap_servers \
+  -e SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=$kafka_bootstrap_servers \
   -e SCHEMA_REGISTRY_HOST_NAME=$SelfIP `# Hostname of schema Registry` \
+  -e SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081 \
+  -e SCHEMA_REGISTRY_DEBUG=true \
   -p 8081:8081 \
-  confluent/schema-registry"
+  confluentinc/cp-schema-registry:5.1.0"
 
 eval $t
 
