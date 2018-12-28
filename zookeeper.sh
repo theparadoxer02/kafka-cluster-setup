@@ -29,6 +29,7 @@ done
 t="docker run -d \
     --name zoo-$id \
     -e ZOOKEEPER_CLIENT_PORT=2181 \
+    -e ZOOKEEPER_LOG4J_ROOT_LOGLEVEL=DEBUG \
     -e zk_id=$id `# Zookeeper ID` \
     $zk_server_list_arg \
     -p 2181:2181 \

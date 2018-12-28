@@ -15,7 +15,7 @@ a = KafkaProducer(bootstrap_servers=['3.0.166.133:9995'])
 
 # SSH to Bastion Server
 ssh-add -k NextSoftware.pem
-ssh -A -i NextSoftware.pem ubuntu@3.1.24.110
+ssh -A -i NextSoftware.pem ubuntu@3.0.206.10
 
 ssh centos@10.0.1.70
 ssh centos@10.0.1.212

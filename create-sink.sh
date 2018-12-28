@@ -12,6 +12,6 @@ curl -X POST -H "Content-Type: application/json" \
         "connection.password": "next_pass",
         "auto.create": true,
         "auto.evolve": true,
-        "topics": "nextiot"
+        "topics": "nextiot",
         }
     }' http://localhost:8083/connectors
