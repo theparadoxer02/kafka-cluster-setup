@@ -15,7 +15,7 @@ a = KafkaProducer(bootstrap_servers=['3.0.166.133:9995'])
 
 # SSH to Bastion Server
 ssh-add -k NextSoftware.pem
-ssh -A -i NextSoftware.pem ubuntu@3.0.206.10
+ssh -A -i NextSoftware.pem ubuntu@13.229.143.185
 
 ssh centos@10.0.1.70
 ssh centos@10.0.1.212
@@ -81,3 +81,10 @@ curl --header "Content-Type: application/json" \
     
 # Check Kafka Version
 docker logs kafka | egrep -i "kafka\W+version"
+
+
+
+##  KSQL Commands
+
+# KSQL CLI
+docker run -it confluentinc/cp-ksql-cli http://10.0.0.11:8088
