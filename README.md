@@ -37,6 +37,7 @@
     To Add private key identity to authentication origin
     ```
     ssh-add -k NextSoftware.pem
+    ssh -A -i NextSoftware.pem ubuntu@bastion_server_public_ip
     ```
 
 
