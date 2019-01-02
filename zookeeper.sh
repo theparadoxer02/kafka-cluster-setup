@@ -27,10 +27,10 @@ done
 # echo $zk_server_list_arg
 
 t="docker run -d \
-    --restart=on-failure:10 \
+    --restart=on-failure:10 `#try restarting container for 10 times` \
     --name zoo-$id \
-    -e ZOOKEEPER_CLIENT_PORT=2181 \
-    -e ZOOKEEPER_LOG4J_ROOT_LOGLEVEL=DEBUG \
+    -e ZOOKEEPER_CLIENT_PORT=2181 `#zookeeper service port` \
+    -e ZOOKEEPER_LOG4J_ROOT_LOGLEVEL=DEBUG `#DEBUG LEVEL` \
     -e zk_id=$id `# Zookeeper ID` \
     $zk_server_list_arg \
     -p 2181:2181 \

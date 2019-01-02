@@ -30,13 +30,13 @@ eval SelfIP=$\Server$id     # Ip address of the current node
 
 ## Kafka on Node1 / Host1:
 t="docker run -d \
-    --restart=on-failure:10 \
+    --restart=on-failure:10 `#try restarting container for 10 times` \
     --name kafka-$id \
     --link zoo-$id:zookeeper \
     -e KAFKA_BROKER_ID=$id `# Kafka Broker Id number` \
     -e KAFKA_ZOOKEEPER_CONNECT=$kafka_server_link `# Zookeeper all Servers Address` \
-    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$SelfIP:9092 \
-    -e KAFKA_LOG4J_ROOT_LOGLEVEL=DEBUG \
+    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$SelfIP:9092 `#Kafka Service Listener Address` \
+    -e KAFKA_LOG4J_ROOT_LOGLEVEL=DEBUG `#DEBUG LEVEL` \
     -p 9092:9092 \
     confluentinc/cp-kafka:5.1.0"
 
