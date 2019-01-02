@@ -29,6 +29,7 @@ eval SelfIP=$\Server$id
 
 
 docker run -d \
+  --restart=on-failure:10 \
   --name=kafka-connect-avro-$id \
   --link zoo-$id:zookeeper \
   --link kafka-$id:kafka \

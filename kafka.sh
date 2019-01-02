@@ -30,6 +30,7 @@ eval SelfIP=$\Server$id     # Ip address of the current node
 
 ## Kafka on Node1 / Host1:
 t="docker run -d \
+    --restart=on-failure:10 \
     --name kafka-$id \
     --link zoo-$id:zookeeper \
     -e KAFKA_BROKER_ID=$id `# Kafka Broker Id number` \

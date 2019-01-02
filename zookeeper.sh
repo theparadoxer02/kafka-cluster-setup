@@ -27,6 +27,7 @@ done
 # echo $zk_server_list_arg
 
 t="docker run -d \
+    --restart=on-failure:10 \
     --name zoo-$id \
     -e ZOOKEEPER_CLIENT_PORT=2181 \
     -e ZOOKEEPER_LOG4J_ROOT_LOGLEVEL=DEBUG \
