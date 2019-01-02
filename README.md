@@ -34,6 +34,12 @@
 
 6. Run Command:
 
+    To Add private key identity to authentication origin
+    ```
+    ssh-add -k NextSoftware.pem
+    ```
+
+
     To Check if all of your hosts are accessible:
     ```
     ansible all -m ping -i hosts.ini
