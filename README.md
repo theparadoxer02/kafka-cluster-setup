@@ -41,6 +41,10 @@
     ```
 
 
+    Disable authorisation key check
+    ```
+    export ANSIBLE_HOST_KEY_CHECKING=False
+    ```
     To Check if all of your hosts are accessible:
     ```
     ansible all -m ping -i hosts.ini

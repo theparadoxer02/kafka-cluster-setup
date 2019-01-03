@@ -1,66 +1,71 @@
-# # {% for ip in "{{ groups['kafka'] | map('extract', hostvars, ['ansible_default_ipv4','address']) | list }}" %} {{ ip }} {% endfor %}
-
-- hosts: all
-  become: yes
-  become_user: root
-  roles:
-    - Docker
-
-  
-- hosts: all
-  tasks:
-    - name: Start Docker Service
-      script: ./start_docker_service.sh
-
-# Download JDBC Postgres
-- hosts: all
-  tasks:
-    - name: Download JDBC Server
-      script: ./download_jdbc.sh
-
-- hosts: all
-  tasks:
-    - name: Wait for dockers to start
-      wait_for:
-        path: /var/run/docker.sock
-    - name: Run Zookeeper
-      script: ./zookeeper.sh 10.0.1.167 10.0.1.172 10.0.1.128
-
-- hosts: all
-  tasks:
-    - name: Wait for dockers to start
-      wait_for:
-        path: /var/run/docker.sock
-    - name: Run Kafka
-      script: ./kafka.sh 10.0.1.167 10.0.1.172 10.0.1.128
-
-
-- hosts: [Node1]
-
-  tasks:
-    - name: Create Kafka Topic in Node 1
-      script: ./create-kafka-topic.sh 10.0.1.167 10.0.1.172 10.0.1.128
-
-- hosts: all
-  tasks:
-    - name: Wait for dockers to start
-      wait_for:
-        path: /var/run/docker.sock    
-    - name: Run Schema Registry
-      script: ./schema-registry.sh 10.0.1.167 10.0.1.172 10.0.1.128
-
-
-- hosts: all
-  tasks:
-    - name: Wait for dockers to start
-      wait_for:
-        path: /var/run/docker.sock    
-    - name: Run Kafka Connect
-      script: ./kafka-connect.sh 10.0.1.167 10.0.1.172 10.0.1.128
-
-
-- hosts: all
+ # {% for ip in "{{ groups['kafka'] | map('extract', hostvars, ['ansible_default_ipv4','address']) | list }}" %} {{ ip }} {% endfor %}
+ - hosts: all
+   become: yes
+   become_user: root
+   roles:
+     - Docker
  
+ - hosts: all
+   tasks:
+     - name: Start Docker Service
+       script: ./start_docker_service.sh
+ # Download JDBC Postgres
+ - hosts: all
+   tasks:
+     - name: Download JDBC Server
+ #       script: ./download_jdbc.sh
+ - hosts: all
+   tasks:
+     - name: Wait for dockers to start
+       wait_for:
+         path: /var/run/docker.sock
+     - name: Run Zookeeper
+       script: ./zookeeper.sh 10.0.1.167 10.0.1.172 10.0.1.128
+ - hosts: all
+   tasks:
+     - name: Wait for dockers to start
+       wait_for:
+         path: /var/run/docker.sock
+     - name: Run Kafka
+       script: ./kafka.sh 10.0.1.167 10.0.1.172 10.0.1.128
+ - hosts: [Node1]
+   tasks:
+     - name: Create Kafka Topic in Node 1
+       script: ./create-kafka-topic.sh 10.0.1.167 10.0.1.172 10.0.1.128
+ - hosts: all
+   tasks:
+     - name: Wait for dockers to start
+       wait_for:
+         path: /var/run/docker.sock    
+     - name: Run Schema Registry
+       script: ./schema-registry.sh 10.0.1.167 10.0.1.172 10.0.1.128
+ - hosts: all
+   tasks:
+     - name: Wait for dockers to start
+       wait_for:
+         path: /var/run/docker.sock    
+     - name: Run Kafka Connect
+       script: ./kafka-connect.sh 10.0.1.167 10.0.1.172 10.0.1.128
+ - hosts: all
+   tasks:
+     - name: Add Sink Connector
+       script: ./create-sink.sh
+ For running flask server
+- hosts: all
   tasks:
-    - name: Add Sink Connector
-      script: ./create-sink.sh
+    - name: Copy flask folder to servers
+      copy:
+        src: ./iot-flask
+        dest: /home/centos/app
+    - name: Install pip
+      yum:
+        name: 
+          - epel-release
+          - python-pip
+        state: latest
+    - pip:
+        requirements: /home/centos/app/iot-flask/requirements.txt
+    - name: Run flask deamon
+      script: ./iot-flask/gunicorn.sh
+      args:
+        chdir: /home/centos/app/iot-flask
