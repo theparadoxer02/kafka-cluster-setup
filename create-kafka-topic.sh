@@ -30,8 +30,7 @@ done
 eval SelfIP=$\Server$id 
 
 t='docker exec -it kafka-$id sh -c "
-  kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $SelfIP:2181 \
-  && kafka-configs --zookeeper $SelfIP:2181 --entity-type topics --entity-name _schemas --alter --add-config cleanup.policy=compact"
+  kafka-topics --create --topic nextiot --partitions $# --replication-factor $# --if-not-exists --zookeeper $SelfIP:2181"
   '
 
 # echo $t
